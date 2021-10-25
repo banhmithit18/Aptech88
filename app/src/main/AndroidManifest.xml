@@ -10,6 +10,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Design.NoActionBar">
         <activity
+            android:name=".Success"
+            android:exported="true" />
+        <activity
+            android:name=".NewPassword"
+            android:exported="true" />
+        <activity
+            android:name=".VerifyOTP"
+            android:exported="true" />
+        <activity
+            android:name=".ForgotPassword"
+            android:exported="true" />
+        <activity
             android:name=".TransactionHistory"
             android:exported="true" />
         <activity
