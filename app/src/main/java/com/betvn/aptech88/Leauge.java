@@ -1,106 +1,95 @@
 package com.betvn.aptech88;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.Collections;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
+import com.betvn.aptech88.Adapter.AdapterLeague;
+import com.betvn.aptech88.Model.League;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Leauge extends AppCompatActivity {
     ListView listView;
     ImageView btn_back_home;
+    List<League> leaugeList;
+    AdapterLeague adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_leauge);
-        btn_back_home=findViewById(R.id.back_home);
-        btn_back_home.setOnClickListener(v->{
-            Intent myIntent = new Intent(this, Home.class);
-            startActivity(myIntent);
-        });
-
+        Intent intent= getIntent();
+        String id_acc= intent.getExtras().getString("id_account_home_league");
         listView=findViewById(R.id.listview);
-        String name[]={"Premier League","Bundesliga","International","International","International"};
-        int id[]={R.drawable.nha,R.drawable.bundesliga,R.drawable.international,R.drawable.international,R.drawable.international};
-//        Integer []image={R.drawable.nha,R.drawable.bundesliga,R.drawable.international};
-//        MyAdapter adapter=new MyAdapter(getApplicationContext(),name,image);
- //       listView.setAdapter(adapter);
-        MyAdapter adapter=new MyAdapter(this,name,id);
+        leaugeList = new ArrayList<League>();
+        get_league();
+        adapter = new AdapterLeague(this,R.layout.list_tournaments,leaugeList);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (position==0){
-                    Toast.makeText(Leauge.this, "Premier League", Toast.LENGTH_SHORT).show();
-                    Intent myIntent = new Intent(Leauge.this, Match.class);
-                    startActivity(myIntent);
-                }
-                if (position==1){
-                    Toast.makeText(Leauge.this, "Bundesliga", Toast.LENGTH_SHORT).show();
-                }
-                if (position==2){
-                    Toast.makeText(Leauge.this, "International", Toast.LENGTH_SHORT).show();
-                }
+                League infor_league = leaugeList.get(position);
+                String id_league=infor_league.getId();
+                Intent intents=new Intent(getApplicationContext(),Match.class);
+                intents.putExtra("id_league",id_league);
+                intents.putExtra("id_account",id_acc);
+                startActivity(intents);
             }
         });
-    }
-    class MyAdapter extends ArrayAdapter<String>{
-        Context context;
-        String name[];
-        int id[];
-        MyAdapter(Context c,String name[],int id[]){
-            super(c,R.layout.list_tournaments,R.id.Name_T,name);
-            this.context=c;
-            this.name=name;
-            this.id=id;
-        }
+        btn_back_home=findViewById(R.id.back_home);
+        btn_back_home.setOnClickListener(v->{
+            Intent intents=new Intent(getApplicationContext(),Home.class);
+            intents.putExtra("id_account",id_acc);
+            startActivity(intents);
+        });
+   }
 
-        @NonNull
-        @Override
-        public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-            LayoutInflater layoutInflater=(LayoutInflater)getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            View row=layoutInflater.inflate(R.layout.list_tournaments,parent,false);
-            ImageView imageView=row.findViewById(R.id.imageview);
-            TextView myname=row.findViewById(R.id.Name_T);
-            imageView.setImageResource(id[position]);
-            myname.setText(name[position]);
-            return row;
-        }
-
+    private void get_league() {
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        String URL = "http://192.168.1.7:8080/LeagueGet";
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, URL, null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                JSONArray jsonArray = response;
+                try {
+                    for(int i=0;i<jsonArray.length();i++)
+                    {
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        String id = jsonObject.getString("id");
+                        String name = jsonObject.getString("name");
+                        leaugeList.add(new League(id,name));
+                    }
+                    adapter.notifyDataSetChanged();//To prevent app from crashing when updating
+                    //UI through background Thread
+                }
+                catch (Exception w)
+                {
+                    Toast.makeText(Leauge.this,w.getMessage(),Toast.LENGTH_LONG).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(Leauge.this,"What Wrong",Toast.LENGTH_LONG).show();
+            }
+        });
+        requestQueue.add(jsonArrayRequest);
     }
-//    public class MyAdapter extends ArrayAdapter<String>{
-//        private  final Context context;
-//        private  final String[] name;
-//        private  final Integer[] image;
-//        public MyAdapter(Context context,String[]name,Integer[] image){
-//            super(context,R.layout.list_tournaments,name);
-//            this.context=context;
-//            this.name=name;
-//            this.image=image;
-//        }
-//        public View getView(int i, @Nullable View convertView, @NonNull ViewGroup parent) {
-//           View view=getLayoutInflater().inflate(R.layout.list_tournaments,parent,false);
-//            ImageView imageView=view.findViewById(R.id.imageview);
-//            TextView myname=view.findViewById(R.id.Name_T);
-//            imageView.setImageResource(image[i]);
-//            myname.setText(name[i]);
-//            return view;
-//        }
-//
-//    }
 
 }

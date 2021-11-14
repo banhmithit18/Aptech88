@@ -12,16 +12,27 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class TransactionHistory extends AppCompatActivity {
     ListView listView;
+    ImageView transaction_history_to_home;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transaction_history);
+        Intent intent= getIntent();
+        String id_acc= intent.getExtras().getString("id_account_home_transaction_history");
+        transaction_history_to_home=findViewById(R.id.transaction_history_to_home);
+        transaction_history_to_home.setOnClickListener(v -> {
+            Intent intents=new Intent(getApplicationContext(),Home.class);
+            intents.putExtra("id_account",id_acc);
+            startActivity(intents);
+        });
         listView=findViewById(R.id.listview_transactionhistory);
         String Transfer_parameter[]={"123450331511313","5678945548445","98745","56123","32145"};
         String Method[]={"MomoPay","MomoPay","MomoPay","MomoPay","MomoPay"};

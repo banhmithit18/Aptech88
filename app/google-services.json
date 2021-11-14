@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "845080106504",
+    "project_id": "otp-verification-ebc09",
+    "storage_bucket": "otp-verification-ebc09.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:845080106504:android:ef02177b5bf1c4f145e3bd",
+        "android_client_info": {
+          "package_name": "com.betvn.aptech88"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "845080106504-kmrr0vrrv3145tbdrea6hhkacepphcd3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.betvn.aptech88",
+            "certificate_hash": "dbf4987234cb217076827a95e71e3d04dbe713d4"
+          }
+        },
+        {
+          "client_id": "845080106504-f0368guth35suufn6e1o9r4725ae09a2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0VftjT73CALy2KfX622AV8ZRud_2J3eQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "845080106504-f0368guth35suufn6e1o9r4725ae09a2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

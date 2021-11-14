@@ -84,6 +84,7 @@
 
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/paypal"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="20dp"
@@ -95,9 +96,10 @@
             app:cardElevation="10dp">
 
             <ImageView
+                android:layout_marginRight="25dp"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:background="@drawable/vtettelpay"
+                android:background="@drawable/paypal"
 />
 
 
@@ -107,7 +109,7 @@
                 android:layout_marginLeft="10dp"
                 android:gravity="center"
                 android:src="@drawable/bundesliga"
-                android:text="Viettel Pay"
+                android:text=" Paypal"
                 android:textSize="20sp"
                 android:textStyle="bold|italic" />
 
