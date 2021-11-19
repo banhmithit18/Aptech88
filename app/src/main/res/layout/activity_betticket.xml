@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f0f2f5"
-    android:orientation="horizontal"
+    android:background="@drawable/radius_btn_login"
+    android:orientation="vertical"
     android:padding="15dp"
     tools:context=".Betticket">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
         <ImageView
@@ -19,71 +19,24 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:background="@drawable/returns" />
-
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/Name_Left"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:gravity="center"
-                android:text="Viet Nam"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/imageview_left"
-                android:layout_width="70dp"
-                android:layout_height="50dp"
-                android:layout_margin="10dp"
-                android:background="@drawable/radius"
-                android:gravity="center"
-                android:src="@drawable/bundesliga"
-                android:text="1.0" />
-
-            <TextView
-                android:id="@+id/imageview_lefts"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:layout_margin="10dp"
-                android:gravity="center"
-                android:src="@drawable/bundesliga"
-                android:text="!!!" />
-
-            <TextView
-                android:id="@+id/imageview_lefst"
-                android:layout_width="70dp"
-                android:layout_height="50dp"
-                android:layout_margin="10dp"
-                android:background="@drawable/radius"
-                android:gravity="center"
-                android:src="@drawable/bundesliga"
-                android:text="0.24" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/day_match"
+                android:id="@+id/bet_name_home"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:gravity="center"
                 android:text="Viet Nam"
                 android:textColor="@color/black"
-                android:textSize="14sp" />
+                android:textSize="18sp"
+                android:textStyle="bold"
+                />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -92,30 +45,30 @@
                 android:gravity="center"
                 android:text="VS"
                 android:textColor="@color/black"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textSize="15sp"
+                />
 
             <TextView
-                android:id="@+id/time_match"
+                android:id="@+id/bet_name_away"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:gravity="center"
                 android:text="Thai Lan"
                 android:textColor="@color/black"
-                android:textSize="14sp" />
+                android:textSize="18sp"
+                android:textStyle="bold"/>
 
         </LinearLayout>
-
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/Name_Right"
+                android:id="@+id/bet_values"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -126,45 +79,91 @@
                 android:textStyle="bold" />
 
         </LinearLayout>
-
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <EditText
-                android:id="@+id/editTextNumbers"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:gravity="center"
-                android:hint="So Tien"
-                android:inputType="number"
-                android:textSize="24sp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/oakda"
+                android:id="@+id/bet_value"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:text="Home"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/bet_odd"
+                android:layout_width="70dp"
+                android:layout_height="50dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/radius"
+                android:gravity="center"
+                android:src="@drawable/bundesliga"
+                android:text="1.0" />
+
+<!--            <TextView-->
+<!--                android:id="@+id/imageview_lefts"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="50dp"-->
+<!--                android:layout_margin="10dp"-->
+<!--                android:gravity="center"-->
+<!--                android:src="@drawable/bundesliga"-->
+<!--                android:text="!!!" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/imageview_lefst"-->
+<!--                android:layout_width="70dp"-->
+<!--                android:layout_height="50dp"-->
+<!--                android:layout_margin="10dp"-->
+<!--                android:background="@drawable/radius"-->
+<!--                android:gravity="center"-->
+<!--                android:src="@drawable/bundesliga"-->
+<!--                android:text="0.24" />-->
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/editTextNumbers_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/radius"
+                android:ems="10"
+                android:gravity="center"
+                android:hint="Amount"
+                android:padding="10dp"
+                android:inputType="number"
+                android:textColor="@color/white"
+                android:textSize="24sp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:gravity="center"
-                android:text="Uoc Tinh Thang"
+                android:text="Current amount"
                 android:textColor="@color/black"
-                android:textSize="16sp" />
+                android:textSize="18sp" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/amount_current"
+                android:layout_width="53dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:gravity="center"
@@ -173,25 +172,62 @@
                 android:textSize="10sp" />
 
             <TextView
-                android:id="@+id/time_matcsadadh"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="24dp"
                 android:layout_margin="10dp"
                 android:gravity="center"
                 android:text="VND"
                 android:textColor="@color/black"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textSize="10sp" />
+
 
         </LinearLayout>
 
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_weight="1"-->
+<!--            android:gravity="center"-->
+<!--            android:orientation="horizontal">-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/oakda"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_margin="10dp"-->
+<!--                android:gravity="center"-->
+<!--                android:text="Uoc Tinh Thang"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textSize="16sp" />-->
+
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_margin="10dp"-->
+<!--                android:gravity="center"-->
+<!--                android:text="10000.00"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textSize="10sp" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/time_matcsadadh"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_margin="10dp"-->
+<!--                android:gravity="center"-->
+<!--                android:text="VND"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textSize="20sp"-->
+<!--                android:textStyle="bold" />-->
+
+<!--        </LinearLayout>-->
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="horizontal">
-
             <Button
                 android:id="@+id/betout"
                 android:layout_width="wrap_content"
@@ -205,6 +241,7 @@
                 android:gravity="center" />
 
             <Button
+                android:id="@+id/accept_bets"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/radius_btn"
@@ -212,20 +249,20 @@
         </LinearLayout>
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="horizontal">-->
 
-        <TextView
-            android:id="@+id/Name_Rights"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:gravity="center"
-            android:text="Thai Lan"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-    </LinearLayout>
+<!--        <TextView-->
+<!--            android:id="@+id/Name_Rights"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_margin="10dp"-->
+<!--            android:gravity="center"-->
+<!--            android:text="Thai Lan"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:textSize="20sp"-->
+<!--            android:textStyle="bold" />-->
+<!--    </LinearLayout>-->
 </LinearLayout>

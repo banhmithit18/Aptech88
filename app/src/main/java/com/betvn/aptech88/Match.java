@@ -23,13 +23,16 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.betvn.aptech88.Adapter.AdapterFixture;
 import com.betvn.aptech88.Adapter.AdapterLeague;
 import com.betvn.aptech88.Model.Fixture;
 import com.betvn.aptech88.Model.League;
+import com.betvn.aptech88.Model.Payment;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -44,6 +47,8 @@ public class Match extends AppCompatActivity {
     ImageView btn_back_leauge;
     List<Fixture> fixtureList;
     AdapterFixture adapter;
+    String ids="";
+    String id_leagues="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,143 +56,86 @@ public class Match extends AppCompatActivity {
         fixtureList = new ArrayList<Fixture>();
         listView=findViewById(R.id.listview_match);
         Intent intent= getIntent();
-        String id= intent.getExtras().getString("id_account");
-        String id_league= intent.getExtras().getString("id_league");
-        getmatch(id_league);
-        String name= intent.getExtras().getString("name_league_match");
+        ids= intent.getExtras().getString("id_account");
+        id_leagues= intent.getExtras().getString("id_league");
+        getmatch(id_leagues);
         adapter = new AdapterFixture(this,R.layout.list_match,fixtureList);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Fixture infor_fixture = fixtureList.get(position);
-                int id_league=infor_fixture.getId();
-                Intent intents=new Intent(getApplicationContext(),Betticket.class);
-                intents.putExtra("id_league",id_league);
-                intents.putExtra("id_account",id);
+                String id_league=infor_fixture.getId();
+                String id_fixture=infor_fixture.getId();
+                String name_home=infor_fixture.getName_team_home();
+                String name_away=infor_fixture.getName_team_away();
+                String date=infor_fixture.getDate();
+                String time=infor_fixture.getTime();
+
+                Intent intents=new Intent(getApplicationContext(),Matchdetails.class);
+                intents.putExtra("id_league",id_leagues);
+                intents.putExtra("id_to_match_detail",ids);
+                intents.putExtra("name_home",name_home);
+                intents.putExtra("name_away",name_away);
+                intents.putExtra("date",date);
+                intents.putExtra("time",time);
+                intents.putExtra("id_fixture",id_fixture);
                 startActivity(intents);
             }
         });
 
         btn_back_leauge=findViewById(R.id.back_leauge);
         btn_back_leauge.setOnClickListener(v->{
-            Intent intents=new Intent(getApplicationContext(),Home.class);
-            intents.putExtra("id_account",id);
+            Intent intents=new Intent(getApplicationContext(),Leauge.class);
+            intents.putExtra("id_account_home_league",ids);
             startActivity(intents);
         });
-//        String name_left[]={"Premier League","Bundesliga","International","International","International"};
-//        int image_left[]={R.drawable.nha,R.drawable.bundesliga,R.drawable.international,R.drawable.international,R.drawable.international};
-//        String name_right[]={"Premier League","Bundesliga","International","International","International"};
-//        int image_right[]={R.drawable.nha,R.drawable.bundesliga,R.drawable.international,R.drawable.international,R.drawable.international};
-//        Match.MatchAdapter adapter=new Match.MatchAdapter(this,name_left,image_left,name_right,image_right);
-//        listView.setAdapter(adapter);
-//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                if (position==0){
-//                    Toast.makeText(Match.this, "Premier League", Toast.LENGTH_SHORT).show();
-//                    Intent myIntent = new Intent(Match.this, Matchdetails.class);
-//                    startActivity(myIntent);
-//                }
-//                if (position==1){
-//                    Toast.makeText(Match.this, "Bundesliga", Toast.LENGTH_SHORT).show();
-//                }
-//                if (position==2){
-//                    Toast.makeText(Match.this, "International", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//        });
-//    }
-//
-//    private void getmatch(String id_league) {
-//        //get match
-//    }
-//
-//    class MatchAdapter extends ArrayAdapter<String> {
-//        Context context;
-//        String name_left[];
-//        int image_left[];
-//        String name_right[];
-//        int image_right[];
-//        public MatchAdapter(Context c, String[] name_left, int[] image_left, String[] name_right, int[] image_right) {
-//            super(c,R.layout.list_match,R.id.Name_Left,name_left);
-//            this.context=c;
-//            this.name_left=name_left;
-//            this.name_right=name_right;
-//            this.image_left=image_left;
-//            this.image_right=image_right;
-//        }
-//
-//
-//        @NonNull
-//        @Override
-//        public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-//            LayoutInflater layoutInflater=(LayoutInflater)getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//            View row=layoutInflater.inflate(R.layout.list_match,parent,false);
-//            ImageView imageView_left=row.findViewById(R.id.imageview_left);
-//            ImageView imageView_right=row.findViewById(R.id.imageview_right);
-//            TextView name_lefts=row.findViewById(R.id.Name_Left);
-//            TextView name_rights=row.findViewById(R.id.Name_Right);
-//            imageView_left.setImageResource(image_left[position]);
-//            imageView_right.setImageResource(image_right[position]);
-//            name_lefts.setText(name_left[position]);
-//            name_rights.setText(name_right[position]);
-//            return row;
-//        }
 
     }
 
     private void getmatch(String id_league) {
+        int id=Integer.parseInt(id_league);
         RequestQueue MyRequestQueue = Volley.newRequestQueue(this);
-        String url = "http://192.168.1.7:8080/AccountLogin";
-        Map<String, String> params = new HashMap();
-        params.put("leagueId", id_league);
-        JSONObject f = new JSONObject(params);
-
-        JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.POST, url, f, new Response.Listener<JSONObject>() {
+        String url = "http://192.168.1.7:8080/getfixture?id="+id;
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.POST, url, null, new Response.Listener<JSONArray>() {
             @Override
-            public void onResponse(JSONObject response) {
-                //TODO: handle success
+            public void onResponse(JSONArray response) {
+                JSONArray jsonArray = response;
                 try {
-                    for(int i=0;i<response.length();i++)
+                    for(int i=0;i<jsonArray.length();i++)
                     {
-                        JSONObject jsonObject = response.getJSONObject(String.valueOf(i));
-                        int home = jsonObject.getInt("home");
-                        int away= jsonObject.getInt("away");
-                        fixtureList.add(new Fixture(home,away));
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        String id_fixture = jsonObject.getString("id");
+                        String home = jsonObject.getString("home");
+                        String away = jsonObject.getString("away");
+                        String date = jsonObject.getString("date");
+                        String time = jsonObject.getString("time");
+                        String homeTeam = jsonObject.getString("homeTeam");
+                        String awayTeam = jsonObject.getString("awayTeam");
+                        JSONObject Js_home = new JSONObject(homeTeam);
+                        String name_home= Js_home.getString("name");
+                        String logo_home= Js_home.getString("logo");
+                        JSONObject Js_away = new JSONObject(awayTeam);
+                        String name_away= Js_away.getString("name");
+                        String logo_away= Js_away.getString("logo");
+                        fixtureList.add(new Fixture(id_fixture,home,away,date,time,logo_home,logo_away,name_home,name_away));
+
                     }
                     adapter.notifyDataSetChanged();//To prevent app from crashing when updating
-                    //UI through background Thread
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                }
+                catch (Exception w)
+                {
+                    Toast.makeText(Match.this,w.getMessage(),Toast.LENGTH_LONG).show();
                 }
             }
+
+
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-//                error.printStackTrace();
-//                //TODO: handle failure
-//                Toast.makeText(Login.this, "Login Fail" + error, Toast.LENGTH_SHORT).show();
-                NetworkResponse errorRes = error.networkResponse;
-                String stringData = "";
-                if(errorRes != null && errorRes.data != null){
-                    try {
-                        stringData = new String(errorRes.data,"UTF-8");
-                    } catch (UnsupportedEncodingException e) {
-                        e.printStackTrace();
-                    }
-                }
-                Toast.makeText(Match.this, stringData, Toast.LENGTH_SHORT).show();
+                Toast.makeText(Match.this,"Match not found",Toast.LENGTH_LONG).show();
             }
-        }) {
-            @NonNull
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("Content-Type","application/json");
-                return params;
-            }
-        };
-        MyRequestQueue.add(jsonRequest);
+        });
+        MyRequestQueue.add(jsonArrayRequest);
     }
 }

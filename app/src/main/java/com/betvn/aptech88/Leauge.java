@@ -62,7 +62,7 @@ public class Leauge extends AppCompatActivity {
 
     private void get_league() {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
-        String URL = "http://192.168.1.7:8080/LeagueGet";
+        String URL = "http://192.168.1.7:8080/LeagueTop";
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, URL, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
@@ -73,7 +73,8 @@ public class Leauge extends AppCompatActivity {
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
                         String id = jsonObject.getString("id");
                         String name = jsonObject.getString("name");
-                        leaugeList.add(new League(id,name));
+                        String logo = jsonObject.getString("logo");
+                        leaugeList.add(new League(id,name,logo));
                     }
                     adapter.notifyDataSetChanged();//To prevent app from crashing when updating
                     //UI through background Thread

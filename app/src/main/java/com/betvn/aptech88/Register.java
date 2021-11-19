@@ -215,7 +215,7 @@ public class Register extends AppCompatActivity {
                             e.printStackTrace();
                         }
                     }
-                    Toast.makeText(Register.this, stringData, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Register.this, "Sign up success", Toast.LENGTH_SHORT).show();
                     }
             }) {
                 @Override

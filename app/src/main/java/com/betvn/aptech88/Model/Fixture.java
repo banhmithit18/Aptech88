@@ -4,60 +4,95 @@ import java.sql.Date;
 import java.sql.Time;
 
 public class Fixture {
-    public int id;
-    public int leagueId;
-    public Date date;
-    public Time time;
-    public int away;
-    public int home;
-    public Boolean status;
-    public Boolean inMatch;
+    public String id;
+    public String leagueId;
+    public String date;
+    public String time;
+    public String away;
+    public String home;
+    public String status;
+    public String inMatch;
+    public String logo_home;
+    public String logo_away;
+    public String name_team_home;
+    public String name_team_away;
 
-    public Fixture(int id, int leagueId, Date date, Time time, int away, int home, Boolean status, Boolean inMatch) {
+
+//    public Fixture(String id, String leagueId, String date, String time, String away, String home, String status, String inMatch) {
+//        this.id = id;
+//        this.leagueId = leagueId;
+//        this.date = date;
+//        this.time = time;
+//        this.away = away;
+//        this.home = home;
+//        this.status = status;
+//        this.inMatch = inMatch;
+//    }
+
+    public Fixture(String id,String home, String away, String date, String time, String logo_home, String logo_away, String name_team_home, String name_team_away) {
         this.id = id;
-        this.leagueId = leagueId;
+        this.away = away;
+        this.home = home;
         this.date = date;
         this.time = time;
-        this.away = away;
-        this.home = home;
-        this.status = status;
-        this.inMatch = inMatch;
+        this.logo_home = logo_home;
+        this.logo_away = logo_away;
+        this.name_team_away = name_team_away;
+        this.name_team_home = name_team_home;
     }
 
-    public Fixture(int home, int away) {
+    public Fixture(String home, String away, String date, String time) {
         this.away = away;
         this.home = home;
+        this.date = date;
+        this.time = time;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public int getLeagueId() {
+    public String getLeagueId() {
         return leagueId;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public Time getTime() {
+    public String getTime() {
         return time;
     }
 
-    public int getAway() {
+    public String getAway() {
         return away;
     }
 
-    public int getHome() {
+    public String getHome() {
         return home;
     }
 
-    public Boolean getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public Boolean getInMatch() {
+    public String getInMatch() {
         return inMatch;
+    }
+
+    public String getLogo_home() {
+        return logo_home;
+    }
+
+    public String getLogo_away() {
+        return logo_away;
+    }
+
+    public String getName_team_home() {
+        return name_team_home;
+    }
+
+    public String getName_team_away() {
+        return name_team_away;
     }
 }

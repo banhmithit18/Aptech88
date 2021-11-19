@@ -14,6 +14,7 @@ import androidx.annotation.Nullable;
 import com.betvn.aptech88.Model.Fixture;
 import com.betvn.aptech88.Model.League;
 import com.betvn.aptech88.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -37,9 +38,15 @@ public class AdapterFixture extends ArrayAdapter<Fixture> {
         ImageView imageView_right=view.findViewById(R.id.imageview_right);
         TextView name_lefts=view.findViewById(R.id.Name_Left);
         TextView name_rights=view.findViewById(R.id.Name_Right);
+        TextView date=view.findViewById(R.id.day_match);
+        TextView time=view.findViewById(R.id.time_match);
         Fixture fixture = fixtureList.get(position);
-        name_lefts.setText(fixture.getHome());
-        name_rights.setText(fixture.getAway());
+        name_lefts.setText(fixture.getName_team_home());
+        name_rights.setText(fixture.getName_team_away());
+        date.setText(fixture.getDate());
+        time.setText(fixture.getTime());
+        Picasso.with(context).load(fixture.getLogo_home()).into(imageView_left);
+        Picasso.with(context).load(fixture.getLogo_away()).into(imageView_right);
         return view;
     }
 }

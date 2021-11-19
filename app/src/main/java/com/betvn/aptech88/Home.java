@@ -135,9 +135,17 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
             click_transaction_history();
         }else if(id == R.id.nav_sign_out) {
             click_sign_out();
+        }else if(id == R.id.nav_bet_history) {
+            click_bet_history();
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void click_bet_history() {
+        Intent myIntent = new Intent(getApplicationContext(), BetHistory.class);
+        myIntent.putExtra("id_account",id_account);
+        startActivity(myIntent);
     }
 
 
@@ -154,7 +162,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 
     private void click_transaction_history() {
         Intent myIntent = new Intent(getApplicationContext(), TransactionHistory.class);
-        myIntent.putExtra("id_account_home_transaction_histiry",id_account);
+        myIntent.putExtra("id_account_home_transaction_history",id_account);
         startActivity(myIntent);
     }
 

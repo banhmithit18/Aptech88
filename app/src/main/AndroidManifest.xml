@@ -13,6 +13,9 @@
         android:theme="@style/Theme.Design.NoActionBar"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".BetHistory"
+            android:exported="true" />
+        <activity
             android:name=".PaymentDetails"
             android:exported="true" />
         <activity
@@ -65,14 +68,18 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT"></category>
-                <category android:name="android.intent.category.BROWSABLE"></category>
-                <data android:scheme="https"
-                    android:host="www.maps.google.com"></data>
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="www.maps.google.com"
+                    android:scheme="https" />
             </intent-filter>
         </activity>
         <activity

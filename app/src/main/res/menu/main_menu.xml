@@ -13,13 +13,9 @@
     </group>
 
         <item
-            android:title="Profile">
+            android:title="Transaction">
             <menu>
                 <group android:checkableBehavior="single">
-                    <item
-                        android:id="@+id/nav_profile"
-                        android:title="Profile"
-                        android:icon="@drawable/ic_baseline_account_circle_24"/>
                     <item
                         android:id="@+id/nav_transfer"
                         android:title="Transfer"
@@ -30,15 +26,23 @@
                         android:icon="@drawable/ic_baseline_money_off_24"/>
                     <item
                         android:id="@+id/nav_transaction_history"
-                        android:title="Transaction History"
+                        android:title="Payment history"
+                        android:icon="@drawable/ic_baseline_history_24"/>
+                    <item
+                        android:id="@+id/nav_bet_history"
+                        android:title="Bet history"
                         android:icon="@drawable/ic_baseline_history_24"/>
                 </group>
             </menu>
         </item>
 
-    <item android:title="Communicate">
+    <item android:title="Profile">
         <menu>
             <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_profile"
+                    android:title="Profile"
+                    android:icon="@drawable/ic_baseline_account_circle_24"/>
                 <item
                     android:id="@+id/nav_sign_out"
                     android:title="Sign Out"

@@ -11,34 +11,36 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.betvn.aptech88.Leauge;
+import com.betvn.aptech88.Model.Bets;
 import com.betvn.aptech88.Model.League;
 import com.betvn.aptech88.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class AdapterLeague extends ArrayAdapter<League> {
+public class AdapterBets extends ArrayAdapter<Bets> {
     Context context;
     int resource;
-    List<League> leagueList;
-    public AdapterLeague(Context context, int resource, List<League> leagueList)
+    List<Bets> betsList;
+    public AdapterBets(Context context, int resource, List<Bets> betsList)
     {
-        super(context,resource,leagueList);
+        super(context,resource,betsList);
         this.context = context;
         this.resource = resource;
-        this.leagueList = leagueList;
+        this.betsList = betsList;
     }
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(resource,null,true);
-        ImageView imageView=view.findViewById(R.id.imageview_id);
-        TextView name=view.findViewById(R.id.Name_T);
-        League league = leagueList.get(position);
-        name.setText(league.getName());
-        Picasso.with(context).load(league.getImage()).into(imageView);
+        TextView name_bets=view.findViewById(R.id.name_bets);
+        TextView value=view.findViewById(R.id.value);
+        TextView odd=view.findViewById(R.id.odd);
+        Bets bets = betsList.get(position);
+        name_bets.setText(bets.getName_bet());
+        value.setText(bets.getValue());
+        odd.setText(bets.getOdd());
         return view;
     }
 }
